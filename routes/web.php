@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PageController@index')->name('welcome');
+
+Route::get('/autocomplete', 'SearchController@autocomplete');
+
+Route::get('/players/{name}', 'SearchController@player');
+
+Route::get('/{league}/{team?}/{game?}', 'SearchController@index');
+

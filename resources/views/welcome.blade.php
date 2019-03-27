@@ -1,95 +1,82 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('content')
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title">
+                Search Highlights
+            </h1>
+            <h2 class="subtitle">
+                Find highlights of players, games, teams or leagues
+            </h2>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+            @include('includes.search-bar')
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+            <div class="columns features">
+                <div class="column is-3 has-text-centered">
+                    <h2 class="title">
+                        <a href="/nba">
+                            <i class="fas fa-basketball-ball"></i><br>
+                            NBA
+                        </a>
+                    </h2>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="column is-3 has-text-centered">
+                    <h2 class="title">
+                        <a href="/nfl">
+                            <i class="fas fa-football-ball"></i><br>
+                            NFL
+                        </a>
+                    </h2>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="column is-3 has-text-centered">
+                    <h2 class="title">
+                        <a href="/mlb">
+                            <i class="fas fa-baseball-ball"></i><br>
+                            MLB
+                        </a>
+                    </h2>
+                </div>
+                <div class="column is-3 has-text-centered">
+                    <h2 class="title">
+                        <a href="/nhl">
+                            <i class="fas fa-hockey-puck"></i><br>
+                            NHL
+                        </a>
+                    </h2>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+    {{--<section class="container">--}}
+        {{--<div class="intro column is-8 is-offset-2">--}}
+            {{--<h2 class="title">Perfect for developers or designers!</h2><br>--}}
+            {{--<p class="subtitle">Vel fringilla est ullamcorper eget nulla facilisi. Nulla facilisi nullam vehicula ipsum a. Neque egestas congue quisque egestas diam in arcu cursus.</p>--}}
+        {{--</div>--}}
+        {{--<div class="sandbox">--}}
+            {{--<div class="tile is-ancestor">--}}
+                {{--<div class="tile is-parent is-shady">--}}
+                    {{--<article class="tile is-child notification is-white">--}}
+                        {{--<p class="title">Hello World</p>--}}
+                        {{--<p class="subtitle">What is up?</p>--}}
+                    {{--</article>--}}
+                {{--</div>--}}
+                {{--<div class="tile is-parent is-shady">--}}
+                    {{--<article class="tile is-child notification is-white">--}}
+                        {{--<p class="title">Foo</p>--}}
+                        {{--<p class="subtitle">Bar</p>--}}
+                    {{--</article>--}}
+                {{--</div>--}}
+                {{--<div class="tile is-parent is-shady">--}}
+                    {{--<article class="tile is-child notification is-white">--}}
+                        {{--<p class="title">Third column</p>--}}
+                        {{--<p class="subtitle">With some content</p>--}}
+                        {{--<div class="content">--}}
+                            {{--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>--}}
+                        {{--</div>--}}
+                    {{--</article>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</section>--}}
+@stop
