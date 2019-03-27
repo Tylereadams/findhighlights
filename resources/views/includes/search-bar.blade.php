@@ -58,6 +58,9 @@
                         response( data );
                     });
                 },
+                open: function(event, ui) {
+                    $('.dropdown-header').off('menufocus hover mouseover mouseenter');
+                },
                 select: function( event, ui ) {
                     window.location.href = ui.item.url;
                 }

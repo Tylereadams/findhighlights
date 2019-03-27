@@ -2,7 +2,7 @@
     <nav class="navbar  has-background-light has-text-dark">
         <div class="container">
             <div class="navbar-brand">
-                <a class="navbar-item" href="../">
+                <a class="navbar-item" href="/">
                     Find Highlights
                 </a>
             </div>

@@ -20,14 +20,6 @@ class SearchController extends Controller
         $selectedLeague = Leagues::where('name', $leagueName)->orderBy('name')->firstOrFail();
         $teams = Teams::where('league_id', $selectedLeague->id)->orderBy('nickname')->get();
 
-//        $searchOptions['teams'] = $teams->map(function($team) use($selectedLeague) {
-//           return [
-//               'name' => $team->nickname,
-//               'url' => url('/'.$selectedLeague->name.'/'.str_slug($team->nickname)),
-//               'category' => 'Teams'
-//           ];
-//        });
-
         $leagues = Leagues::all();
         foreach($leagues as $league) {
             $leagueOptions[] = [
@@ -57,14 +49,6 @@ class SearchController extends Controller
                 ->orderBy('start_date', 'DESC')
                 ->get();
             $games->load(['homeTeam', 'awayTeam', 'league']);
-//
-//            $searchOptions['games'] = $games->map(function($game) use($selectedTeam) {
-//                return [
-//                    'url' => url('/'.$game->league->name.'/'.str_slug($selectedTeam->nickname).'/'.$game->url_segment),
-//                    'name' => $game->homeTeam->nickname.' vs '.$game->awayTeam->nickname.' - '.$game->start_date->format('M j y'),
-//                    'category' => 'Games'
-//                ];
-//            });
 
             foreach($teams as $team) {
                 $teamOptions[] = [
@@ -107,12 +91,11 @@ class SearchController extends Controller
         }
 
         $highlights = $highlightsQuery->orderBy('created_at', 'DESC')->paginate(12);
-        $highlights->load(['game.league', 'game.awayTeam', 'game.homeTeam', 'team', 'players']);
+        $highlights->load(['game.league', 'game.awayTeam', 'game.homeTeam', 'team.league', 'players']);
 
         $data = [
             'highlights' => $highlights,
-            'breadcrumbs' => $breadcrumbs,
-//            'searchOptions' => $searchOptions
+            'breadcrumbs' => $breadcrumbs
         ];
 
         return view('highlights', $data);
