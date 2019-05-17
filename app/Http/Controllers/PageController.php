@@ -16,13 +16,18 @@ class PageController extends Controller
     {
 
         // Get id's of teams with recent highlights and order by count
-        $teamIds = Highlights::select('team_id', \DB::raw('count(*) as total'))
+        $teamIds = Highlights::select('team_id', \DB::raw('COUNT(id) as total'))
             ->where('created_at', '>', Carbon::now()->subHours(36))
             ->groupBy('team_id')
             ->orderByDesc('total')
             ->take(5)
-            ->get()
-            ->toArray();
+            ->pluck('team_id');
+
+        if(!$teamIds) {
+            $teamIds = Highlights::where('created_at', '>', Carbon::now()->subHours(72))
+                ->take(5)
+                ->pluck('team_id');
+        }
 
         // Get Teams
         $teamsWithHighlights = Teams::whereIn('id', $teamIds)->get();
@@ -36,8 +41,10 @@ class PageController extends Controller
         }
 
         // Recent Games
-        $games = Games::orderBy('start_date', 'DESC')
-            ->take(5)->get();
+        $games = Games::where('start_date', '<', Carbon::now())
+            ->orderBy('start_date', 'DESC')
+            ->take(5)
+            ->get();
         $games->load(['homeTeam', 'awayTeam', 'league']);
 
         $recentGames = [];
@@ -49,12 +56,12 @@ class PageController extends Controller
         }
 
         // Get id's of players with recent highlights and order by count
-        $playerIds = PlayerHighlights::select('player_id', \DB::raw('count(*) as total'))
+        $playerIds = PlayerHighlights::select('player_id', \DB::raw('COUNT(tweet_logs_id) as total'))
             ->where('created_at', '>', Carbon::now()->subHours(36))
             ->groupBy('player_id')
             ->orderByDesc('total')
             ->take(5)
-            ->get()
+            ->pluck('player_id')
             ->toArray();
 
         // Get Teams
