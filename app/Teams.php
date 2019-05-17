@@ -20,6 +20,11 @@ class Teams extends Model
         return $this->hasMany(Players::class, 'team_id');
     }
 
+    public function highlights()
+    {
+        return $this->hasMany(Highlights::class, 'team_id');
+    }
+
 
     /**
      * Functions

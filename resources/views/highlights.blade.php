@@ -5,7 +5,7 @@
 
         @include('includes.search-bar')
 
-        <nav class="breadcrumb navbar has-background-light" aria-label="breadcrumbs">
+        <nav class="breadcrumb navbar" aria-label="breadcrumbs">
             <div class="navbar-item" style="float:left;">
                 <div class="control navbar-start has-icons-left">
                     <ul>

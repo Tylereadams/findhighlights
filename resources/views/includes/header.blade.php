@@ -1,5 +1,5 @@
 <div class="hero-head">
-    <nav class="navbar  has-background-light has-text-dark">
+    <nav class="navbar has-text-dark">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="/">

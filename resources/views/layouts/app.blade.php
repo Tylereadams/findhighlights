@@ -4,8 +4,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/hero.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('css/hero.css') }}" rel="stylesheet">--}}
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137036648-1"></script>
@@ -31,7 +30,7 @@
 
 </head>
 <body>
-    <section class="has-background-light has-text-grey-dark">
+    <section class="has-text-grey-dark">
 
         @include('includes.header')
 
