@@ -39,6 +39,6 @@ class Games extends Model
 
     public function title()
     {
-        return $this->awayTeam->nickname . ' ' . ($this->status > 1 ? $this->away_score : '') . ' ' . $this->homeTeam->nickname . '  ' . ($this->status > 1 ? $this->home_score : '');
+        return $this->awayTeam->nickname . ' ' . ($this->status > 1 ? $this->away_score : '') . ' @ ' . $this->homeTeam->nickname . ' ' . ($this->status > 1 ? $this->home_score : '') . ($this->ended_at ? ' - Final' : '');
     }
 }

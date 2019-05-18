@@ -1,11 +1,4 @@
 <div class="card is-shady">
-    <header class="card-header">
-        <div class="card-header-title">
-            <a href="{{ $highlight->game->url() }}">
-                <small>{{ $highlight->game->awayTeam->nickname  }} vs {{ $highlight->game->homeTeam->nickname }}</small>
-            </a>
-        </div>
-    </header>
     <div class="card-image">
         <video controls>
             <source src="{{ $highlight->url() }}" poster="{{ $highlight->media_url }}" type="video/mp4">

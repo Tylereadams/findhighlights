@@ -22,9 +22,7 @@
                 <h3 class="title">{{ $date }}</h3>
 
                 @foreach($groupedByGameHighlights as $gameHighlights)
-                    @if(!$loop->first)
                         <hr>
-                    @endif
                     <h5 class="subtitle is-5">{{ $gameHighlights->first()->game->title() }}</h5>
 
                     @foreach($gameHighlights->chunk(2) as $key => $chunk)
