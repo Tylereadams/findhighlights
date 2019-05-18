@@ -93,8 +93,10 @@ class SearchController extends Controller
         $highlightsPaginated = $highlightsQuery->orderBy('created_at', 'DESC')->paginate(12);
         $highlightsPaginated->load(['game.league', 'game.awayTeam', 'game.homeTeam', 'team.league', 'players']);
 
-        $groupedHighlights = $highlightsPaginated->groupBy(function($date) {
-            return Carbon::parse($date->created_at)->format('M j'); // grouping by years
+        $groupedHighlights = $highlightsPaginated->groupBy(function($highlight){
+            return $highlight->game->homeTeam->nickname.' vs '.$highlight->game->awayTeam->nickname;
+        })->groupBy(function($gameHighlights){
+            return $gameHighlights->first()->game->start_date->format('n/j');
         });
 
         $data = [
@@ -200,8 +202,10 @@ class SearchController extends Controller
 
         $highlightsPaginated = $player->highlights()->whereHas('game')->orderBy('created_at', 'DESC')->paginate();
 
-        $groupedHighlights = $highlightsPaginated->groupBy(function($date) {
-            return Carbon::parse($date->created_at)->format('M j'); // grouping by years
+        $groupedHighlights = $highlightsPaginated->groupBy(function($highlight){
+            return $highlight->game->homeTeam->nickname.' vs '.$highlight->game->awayTeam->nickname;
+        })->groupBy(function($gameHighlights){
+            return $gameHighlights->first()->game->start_date->format('n/j');
         });
 
         $data = [

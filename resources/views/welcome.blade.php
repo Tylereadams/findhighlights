@@ -60,10 +60,10 @@
 
         <div class="container">
 
-            <nav class="level">
-                <div class="level-item has-text-left">
+            <div class="columns">
+                <div class="column">
                     <div>
-                        <p class="title">Recent Games</p><br>
+                        <p class="title">Games</p>
                         <ul>
                             @foreach($recentGames as $game)
                                 <li><small>{!! $game['iconHtml'] !!} {{ $game['date'] }}</small> - <a href="{{ $game['url'] }}">{{ $game['awayTeam']['nickname'] }} {{ $game['awayTeam']['score'] }} @ {{ $game['homeTeam']['nickname'] }} {{ $game['homeTeam']['score'] }}</a></li>
@@ -71,9 +71,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="level-item">
+                <div class="column">
                     <div>
-                        <p class="title">Popular Teams</p><br>
+                        <p class="title">Teams</p>
                         <ul>
                             @foreach($popularTeams as $team)
                                 <li><small>{!! $team['iconHtml'] !!}</small> <a href="{{ $team['url'] }}">{{ $team['name'] }}</a></li>
@@ -81,9 +81,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="level-item">
+                <div class="column">
                     <div>
-                        <p class="title">Popular Players</p><br>
+                        <p class="title">Players</p>
                         <ul>
                             @foreach($popularPlayers as $player)
                                 <li><small>{!! $player['iconHtml'] !!}</small> <a href="{{ $player['url'] }}">{{ $player['name'] }}</a></li>
@@ -91,27 +91,8 @@
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </div>
 
-            {{--<div class="sandbox">--}}
-                {{--<div class="tile is-ancestor has-text-left" >--}}
-                    {{--<div class="tile is-parent is-shady">--}}
-                        {{--<article class="tile is-child notification is-white">--}}
-
-                        {{--</article>--}}
-                    {{--</div>--}}
-                    {{--<div class="tile is-parent is-shady">--}}
-                        {{--<article class="tile is-child notification is-white">--}}
-
-                        {{--</article>--}}
-                    {{--</div>--}}
-                    {{--<div class="tile is-parent is-shady">--}}
-                        {{--<article class="tile is-child notification is-white">--}}
-
-                        {{--</article>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
         </div>
     </div>
 @stop

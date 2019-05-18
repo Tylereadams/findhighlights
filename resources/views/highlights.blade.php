@@ -18,17 +18,26 @@
         </nav>
 
         <div class="hero-body">
-            @foreach($groupedHighlights as $date => $highlights)
-                <h3 class="title is-3">{{ $date }}</h3>
-                @foreach($highlights->chunk(2) as $chunk)
-                    <div class="columns">
-                        @foreach($chunk as $highlight)
-                            <div class="column">
-                                @include('partials.highlight')
-                            </div>
-                        @endforeach
-                    </div>
+            @foreach($groupedHighlights as $date => $groupedByGameHighlights)
+                <h3 class="title">{{ $date }}</h3>
+
+                @foreach($groupedByGameHighlights as $gameHighlights)
+                    @if(!$loop->first)
+                        <hr>
+                    @endif
+                    <h5 class="subtitle is-5">{{ $gameHighlights->first()->game->title() }}</h5>
+
+                    @foreach($gameHighlights->chunk(2) as $key => $chunk)
+                        <div class="columns">
+                            @foreach($chunk as $highlight)
+                                <div class="column">
+                                    @include('partials.highlight')
+                                </div>
+                            @endforeach
+                        </div>
+                    @endforeach
                 @endforeach
+
             @endforeach
         </div>
 

@@ -36,4 +36,9 @@ class Games extends Model
     {
         return url('/'.$this->league->name.'/'.str_slug($this->homeTeam->nickname).'/'.str_slug($this->url_segment));
     }
+
+    public function title()
+    {
+        return $this->awayTeam->nickname . ' ' . ($this->status > 1 ? $this->away_score : '') . ' ' . $this->homeTeam->nickname . '  ' . ($this->status > 1 ? $this->home_score : '');
+    }
 }

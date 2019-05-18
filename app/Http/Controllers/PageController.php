@@ -20,12 +20,12 @@ class PageController extends Controller
             ->where('created_at', '>', Carbon::now()->subHours(36))
             ->groupBy('team_id')
             ->orderByDesc('total')
-            ->take(5)
+            ->take(10)
             ->pluck('team_id');
 
         if(!$teamIds) {
             $teamIds = Highlights::where('created_at', '>', Carbon::now()->subHours(72))
-                ->take(5)
+                ->take(10)
                 ->pluck('team_id');
         }
 
@@ -45,7 +45,7 @@ class PageController extends Controller
         $gameIds = Highlights::select('game_id', \DB::raw('MAX(created_at) as most_recent'))
             ->groupBy('game_id')
             ->orderByDesc('most_recent')
-            ->take(5)
+            ->take(10)
             ->pluck('game_id');
 
         $games = Games::whereIn('id', $gameIds)->get();
@@ -73,7 +73,7 @@ class PageController extends Controller
             ->where('created_at', '>', Carbon::now()->subHours(36))
             ->groupBy('player_id')
             ->orderByDesc('total')
-            ->take(5)
+            ->take(10)
             ->pluck('player_id')
             ->toArray();
 

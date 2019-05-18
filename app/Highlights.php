@@ -27,6 +27,15 @@ class Highlights extends Model
         return $this->hasManyThrough(Players::class, PlayerHighlights::class, 'tweet_logs_id', 'id', 'id', 'player_id');
     }
 
+    public function groupByDaysAndGame($q)
+    {
+        return $q->groupBy(function($highlight){
+            return $highlight->game->homeTeam->nickname.' vs '.$highlight->game->awayTeam->nickname;
+        })->groupBy(function($gameHighlights){
+            return $gameHighlights->first()->game->start_date->format('n/j');
+        });
+    }
+
     /******************
      * Functions
      ******************/
