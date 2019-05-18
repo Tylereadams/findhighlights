@@ -10,6 +10,7 @@ use App\Teams;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Players;
+use Carbon\Carbon;
 
 class SearchController extends Controller
 {
@@ -41,7 +42,7 @@ class SearchController extends Controller
 
         if($teamName) {
             $selectedTeam = Teams::where('league_id', $selectedLeague->id)
-                ->where('nickname', $teamName)
+                ->where('nickname', str_replace('-', ' ', $teamName))
                 ->firstOrFail();
 
             $games = Games::where('home_team_id', $selectedTeam->id)
@@ -68,8 +69,7 @@ class SearchController extends Controller
         }
 
         if($gameUrlSegment) {
-            $selectedGame = $games->where('url_segment',$gameUrlSegment)
-                ->first();
+            $selectedGame = $games->where('url_segment',$gameUrlSegment)->first();
 
             foreach($games as $game) {
                 $gameOptions[] = [
@@ -90,12 +90,17 @@ class SearchController extends Controller
             });
         }
 
-        $highlights = $highlightsQuery->orderBy('created_at', 'DESC')->paginate(12);
-        $highlights->load(['game.league', 'game.awayTeam', 'game.homeTeam', 'team.league', 'players']);
+        $highlightsPaginated = $highlightsQuery->orderBy('created_at', 'DESC')->paginate(12);
+        $highlightsPaginated->load(['game.league', 'game.awayTeam', 'game.homeTeam', 'team.league', 'players']);
+
+        $groupedHighlights = $highlightsPaginated->groupBy(function($date) {
+            return Carbon::parse($date->created_at)->format('M j'); // grouping by years
+        });
 
         $data = [
-            'highlights' => $highlights,
-            'breadcrumbs' => $breadcrumbs
+            'groupedHighlights' => $groupedHighlights,
+            'breadcrumbs' => $breadcrumbs,
+            'highlightsPaginated' => $highlightsPaginated
         ];
 
         return view('highlights', $data);
@@ -192,8 +197,16 @@ class SearchController extends Controller
     {
         $player = Players::where('url_segment', $urlSegment)->firstOrFail();
 
+
+        $highlightsPaginated = $player->highlights()->whereHas('game')->orderBy('created_at', 'DESC')->paginate();
+
+        $groupedHighlights = $highlightsPaginated->groupBy(function($date) {
+            return Carbon::parse($date->created_at)->format('M j'); // grouping by years
+        });
+
         $data = [
-            'highlights' => $player->highlights()->whereHas('game')->orderBy('created_at', 'DESC')->paginate(),
+            'highlightsPaginated' => $highlightsPaginated,
+            'groupedHighlights' => $groupedHighlights,
             'breadcrumbs' => [
                 [
                     'url' => $player->team->league->url(),

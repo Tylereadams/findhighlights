@@ -10,73 +10,108 @@
                 Find highlights of players, games, teams or leagues
             </h2>
 
-            @include('includes.search-bar')
+            <section class="hero">
+                <div class="hero-body">
+                    <div class="container">
+                @include('includes.search-bar')
+                    </div>
+                </div>
+            </section>
 
-            <div class="columns">
-                <div class="column is-3 has-text-centered">
-                    <h2 class="title">
+            <nav class="level">
+                <div class="level-item has-text-centered">
+                    <div>
                         <a href="/nba">
-                            <i class="fas fa-basketball-ball"></i><br>
-                            NBA
+                            <p class="heading">NBA</p>
+                            <p class="title"><i class="fas fa-basketball-ball"></i></p>
                         </a>
-                    </h2>
+                    </div>
                 </div>
-                <div class="column is-3 has-text-centered">
-                    <h2 class="title">
+                <div class="level-item has-text-centered">
+                    <div>
                         <a href="/nfl">
-                            <i class="fas fa-football-ball"></i><br>
-                            NFL
+                            <p class="heading">NFL</p>
+                            <p class="title"><i class="fas fa-football-ball"></i></p>
                         </a>
-                    </h2>
+                    </div>
                 </div>
-                <div class="column is-3 has-text-centered">
-                    <h2 class="title">
+                <div class="level-item has-text-centered">
+                    <div>
                         <a href="/mlb">
-                            <i class="fas fa-baseball-ball"></i><br>
-                            MLB
+                            <p class="heading">MLB</p>
+                            <p class="title"><i class="fas fa-baseball-ball"></i></p>
                         </a>
-                    </h2>
+                    </div>
                 </div>
-                <div class="column is-3 has-text-centered">
-                    <h2 class="title">
+                <div class="level-item has-text-centered">
+                    <div>
                         <a href="/nhl">
-                            <i class="fas fa-hockey-puck"></i><br>
-                            NHL
+                            <p class="heading">NHL</p>
+                            <p class="title"><i class="fas fa-hockey-puck"></i></p>
                         </a>
-                    </h2>
+                    </div>
                 </div>
-            </div>
+            </nav>
+        </div>
+
+        <br>
+
+        <hr>
+
+        <div class="container">
+
+            <nav class="level">
+                <div class="level-item has-text-left">
+                    <div>
+                        <p class="title">Recent Games</p><br>
+                        <ul>
+                            @foreach($recentGames as $game)
+                                <li><small>{!! $game['iconHtml'] !!} {{ $game['date'] }}</small> - <a href="{{ $game['url'] }}">{{ $game['awayTeam']['nickname'] }} {{ $game['awayTeam']['score'] }} @ {{ $game['homeTeam']['nickname'] }} {{ $game['homeTeam']['score'] }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                <div class="level-item">
+                    <div>
+                        <p class="title">Popular Teams</p><br>
+                        <ul>
+                            @foreach($popularTeams as $team)
+                                <li><small>{!! $team['iconHtml'] !!}</small> <a href="{{ $team['url'] }}">{{ $team['name'] }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                <div class="level-item">
+                    <div>
+                        <p class="title">Popular Players</p><br>
+                        <ul>
+                            @foreach($popularPlayers as $player)
+                                <li><small>{!! $player['iconHtml'] !!}</small> <a href="{{ $player['url'] }}">{{ $player['name'] }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            {{--<div class="sandbox">--}}
+                {{--<div class="tile is-ancestor has-text-left" >--}}
+                    {{--<div class="tile is-parent is-shady">--}}
+                        {{--<article class="tile is-child notification is-white">--}}
+
+                        {{--</article>--}}
+                    {{--</div>--}}
+                    {{--<div class="tile is-parent is-shady">--}}
+                        {{--<article class="tile is-child notification is-white">--}}
+
+                        {{--</article>--}}
+                    {{--</div>--}}
+                    {{--<div class="tile is-parent is-shady">--}}
+                        {{--<article class="tile is-child notification is-white">--}}
+
+                        {{--</article>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
     </div>
-
-    <section class="footer">
-        <div class="sandbox">
-            <div class="tile is-ancestor">
-                <div class="tile is-parent is-shady">
-                    <article class="tile is-child notification is-white">
-                        <p class="title">Recent Games</p>
-                        @foreach($recentGames as $game)
-                            <li><a href="{{ $game['url'] }}">{{ $game['name'] }}</a></li>
-                        @endforeach
-                    </article>
-                </div>
-                <div class="tile is-parent is-shady">
-                    <article class="tile is-child notification is-white">
-                        <p class="title">Popular Teams</p>
-                        @foreach($popularTeams as $team)
-                            <li><a href="{{ $team['url'] }}">{{ $team['name'] }}</a></li>
-                        @endforeach
-                    </article>
-                </div>
-                <div class="tile is-parent is-shady">
-                    <article class="tile is-child notification is-white">
-                        <p class="title">Popular Players</p>
-                        @foreach($popularPlayers as $player)
-                            <li><a href="{{ $player['url'] }}">{{ $player['name'] }}</a></li>
-                        @endforeach
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
 @stop

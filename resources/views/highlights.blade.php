@@ -17,17 +17,20 @@
             </div>
         </nav>
 
-        @foreach(array_chunk($highlights->items(), 2) as $chunk)
-            <div class="columns">
-                @foreach($chunk as $highlight)
-                    <div class="column">
-                        @include('partials.highlight')
-                    </div>
-                @endforeach
-            </div>
+        @foreach($groupedHighlights as $date => $highlights)
+            <h3 class="title is-3">{{ $date }}</h3>
+            @foreach($highlights->chunk(2) as $chunk)
+                <div class="columns">
+                    @foreach($chunk as $highlight)
+                        <div class="column">
+                            @include('partials.highlight')
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
         @endforeach
 
-        {{ $highlights->links('vendor.pagination.bulma') }}
+        {{ $highlightsPaginated->links('vendor.pagination.bulma') }}
 
     </section>
 @stop

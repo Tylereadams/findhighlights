@@ -19,14 +19,22 @@
     {{--Bulma--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
 
+    <link rel="stylesheet" href="/css/main.css">
+
     {{--Font Awesome--}}
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    {{--jQuery--}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {{--jQuery UI--}}
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-    {{--Template--}}
-    {{--<link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />--}}
+    <style type="text/css">
+        a:visited, a:link, a:active
+        {
+            text-decoration: none !important;
+        }
+    </style>
 
 </head>
 <body>
