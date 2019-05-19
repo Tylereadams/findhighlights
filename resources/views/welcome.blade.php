@@ -18,8 +18,8 @@
                 </div>
             </section>
 
-            <nav class="level">
-                <div class="level-item has-text-centered">
+            <nav class="columns is-flex-mobile">
+                <div class="column has-text-centered">
                     <div>
                         <a href="/nba">
                             <p class="heading">NBA</p>
@@ -27,7 +27,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="level-item has-text-centered">
+                <div class="column has-text-centered">
                     <div>
                         <a href="/nfl">
                             <p class="heading">NFL</p>
@@ -35,7 +35,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="level-item has-text-centered">
+                <div class="column has-text-centered">
                     <div>
                         <a href="/mlb">
                             <p class="heading">MLB</p>
@@ -43,7 +43,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="level-item has-text-centered">
+                <div class="column has-text-centered">
                     <div>
                         <a href="/nhl">
                             <p class="heading">NHL</p>
