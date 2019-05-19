@@ -76,7 +76,13 @@ class SearchController extends Controller
         $data = [
             'groupedHighlights' => $groupedHighlights,
             'breadcrumbs' => $breadcrumbs,
-            'highlightsPaginated' => $highlightsPaginated
+            'highlightsPaginated' => $highlightsPaginated,
+            'metaTags' => [
+                'title' => end($breadcrumbs)['name']. ' highlights',
+                'description' => '',
+                'imageUrl' => $selectedGame ? $selectedGame->imageUrl() : '',
+                'url' => end($breadcrumbs)['url'],
+            ]
         ];
 
         return view('highlights', $data);

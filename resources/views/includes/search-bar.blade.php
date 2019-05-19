@@ -1,10 +1,10 @@
 <div class="field has-addons level">
     <div class="level-item has-text-centered" style="width: 100%;">
-        <div class="control has-icons-left" style="width: 100%;">
+        <div class="control" style="width: 100%;">
             {{--<span class="icon is-left is-medium">--}}
               {{--<i class="fas fa-search fa-2x"></i>--}}
             {{--</span>--}}
-            <input id="search" class="input is-info has-padding-lg is-large" type="text" placeholder="Ex: 'Browns', 'Baker Mayfield' or 'Warriors vs Rockets">
+            <input id="search" class="input is-info has-padding-lg is-large" type="text" placeholder="Ex: 'Browns', 'Baker Mayfield' or 'Warriors vs Rockets'">
         </div>
     </div>
 </div>

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('metaTags')
+    @include('includes/metaTags', $metaTags)
+@endsection
+
 @section('content')
     <section class="container">
 

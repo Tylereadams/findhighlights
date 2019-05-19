@@ -41,4 +41,9 @@ class Games extends Model
     {
         return $this->awayTeam->nickname . ' ' . ($this->status > 1 ? $this->away_score : '') . ' @ ' . $this->homeTeam->nickname . ' ' . ($this->status > 1 ? $this->home_score : '') . ($this->ended_at ? ' - Final' : '');
     }
+
+    public function imageUrl()
+    {
+        return 'http://betbuddies.co/game/' . $this->url_segment . '/image';
+    }
 }

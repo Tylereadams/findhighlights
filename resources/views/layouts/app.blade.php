@@ -33,6 +33,8 @@
         }
     </style>
 
+    @yield('metaTags')
+
 </head>
 <body>
     <section class="has-text-grey-dark">
