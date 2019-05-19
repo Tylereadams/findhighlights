@@ -50,7 +50,7 @@ class PageController extends Controller
             ->pluck('game_id');
 
         // Get games of recent highlights
-        $games = Games::whereIn('id', $gameIds)->get();
+        $games = Games::whereIn('id', $gameIds)->orderBy('start_date', 'DESC')->get();
         $games->load(['homeTeam', 'awayTeam', 'league']);
 
         $recentGames = [];

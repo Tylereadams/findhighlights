@@ -19,7 +19,7 @@
             </section>
 
             <nav class="columns is-flex-mobile">
-                <div class="column has-text-centered">
+                <div class="column">
                     <div>
                         <a href="/nba">
                             <p class="heading">NBA</p>
@@ -27,7 +27,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="column has-text-centered">
+                <div class="column">
                     <div>
                         <a href="/nfl">
                             <p class="heading">NFL</p>
@@ -35,7 +35,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="column has-text-centered">
+                <div class="column">
                     <div>
                         <a href="/mlb">
                             <p class="heading">MLB</p>
@@ -43,7 +43,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="column has-text-centered">
+                <div class="column">
                     <div>
                         <a href="/nhl">
                             <p class="heading">NHL</p>
@@ -61,8 +61,8 @@
         <div class="container">
             <h3 class="is-3 title has-text-grey-light"><i class="fas fa-fire-alt"></i> Trending</h3>
 
-            <nav class="level">
-            <div class="level-item-left">
+            <div class="columns  is-multiline is-centered">
+            <div class="column">
                 <div>
                     <h4 class="title is-4 has-text-grey-light mb-2">Games</h4>
                     <div class="has-padding-left-lg">
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <div class="level-item-left">
+            <div class="column">
                 <div>
                     <h4 class="title is-4 has-text-grey-light">Teams</h4>
                     <div class="has-padding-left-lg">
@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <div class="level-item-left">
+            <div class="column">
                 <div>
                     <h4 class="title is-4 has-text-grey-light">Players</h4>
                     <div class="has-padding-left-lg">
@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </div>
         </div>
 
     </div>

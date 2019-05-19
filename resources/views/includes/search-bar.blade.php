@@ -1,10 +1,10 @@
 <div class="field has-addons level">
     <div class="level-item has-text-centered" style="width: 100%;">
         <div class="control has-icons-left" style="width: 100%;">
-            <span class="icon is-left">
-              <i class="fas fa-search"></i>
-            </span>
-            <input id="search" class="input is-info has-padding-lg is-large" type="text" placeholder="Ex: 'Nick Chubb'">
+            {{--<span class="icon is-left is-medium">--}}
+              {{--<i class="fas fa-search fa-2x"></i>--}}
+            {{--</span>--}}
+            <input id="search" class="input is-info has-padding-lg is-large" type="text" placeholder="Ex: 'Browns', 'Baker Mayfield' or 'Warriors vs Rockets">
         </div>
     </div>
 </div>
@@ -32,7 +32,7 @@
                         li = that._renderItemData( ul, item );
                         if ( item.category ) {
                             li.attr( "aria-label", item.category + " : " + item.label );
-                            li.children(":first").attr( "class", "dropdown-item");
+                            li.children(":first").attr( "class", "dropdown-item is-size-5");
                             if(item.icon){
                                 li.children(":first").prepend(item.icon + " ");
                             }

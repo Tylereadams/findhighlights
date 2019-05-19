@@ -7,7 +7,7 @@
 
         <nav class="breadcrumb navbar has-background-white" aria-label="breadcrumbs">
             <div class="navbar-item" style="float:left;">
-                <div class="control navbar-start has-icons-left">
+                <div class="control navbar-start has-icons-left is-size-4">
                     <ul>
                         @foreach($breadcrumbs as $key => $breadcrumb)
                             <li><a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['name'] }}</a></li>
@@ -17,13 +17,15 @@
             </div>
         </nav>
 
+        <h2>{{ end($breadcrumbs)['name'] }}</h2>
+
         <div class="hero-body">
             @foreach($groupedHighlights as $date => $groupedByGameHighlights)
                 <h3 class="title">{{ $date }}</h3>
 
                 @foreach($groupedByGameHighlights as $gameHighlights)
                         <hr>
-                    <h5 class="subtitle is-5"><a href="{{ $gameHighlights->first()->game->url() }}">{{ $gameHighlights->first()->game->title() }}</a></h5>
+                    <h4 class="subtitle is-4"><a href="{{ $gameHighlights->first()->game->url() }}">{{ $gameHighlights->first()->game->title() }}</a></h4>
 
                     @foreach($gameHighlights->chunk(1) as $key => $chunk)
                         <div class="columns">
