@@ -4,7 +4,7 @@
             <span class="icon is-left">
               <i class="fas fa-search"></i>
             </span>
-            <input id="search" class="input" type="text" placeholder="Search by team, player, or date to find highlights">
+            <input id="search" class="input is-info has-padding-lg is-large" type="text" placeholder="Ex: 'Nick Chubb'">
         </div>
     </div>
 </div>

@@ -19,21 +19,18 @@ class SearchController extends Controller
     public function index($leagueName, $teamName = null, $gameUrlSegment = null)
     {
         $selectedLeague = Leagues::where('name', $leagueName)->orderBy('name')->firstOrFail();
-        $teams = Teams::where('league_id', $selectedLeague->id)->orderBy('nickname')->get();
 
         $leagues = Leagues::all();
         foreach($leagues as $league) {
             $leagueOptions[] = [
                 'url' => url('/'.$league->name),
                 'label' => strtoupper($league->name),
-                'selected' => $league->id == $selectedLeague->id ? true : false,
             ];
         }
 
         $breadcrumbs[] = [
                 'url' => url('/'.$selectedLeague->name),
                 'name' => strtoupper($selectedLeague->name),
-                'options' => $leagueOptions
         ];
 
         $highlightsQuery = Highlights::whereHas('team', function($q) use($selectedLeague) {
@@ -45,49 +42,26 @@ class SearchController extends Controller
                 ->where('nickname', str_replace('-', ' ', $teamName))
                 ->firstOrFail();
 
-            $games = Games::where('home_team_id', $selectedTeam->id)
-                ->orWhere('away_team_id', $selectedTeam->id)
-                ->orderBy('start_date', 'DESC')
-                ->get();
-            $games->load(['homeTeam', 'awayTeam', 'league']);
-
-            foreach($teams as $team) {
-                $teamOptions[] = [
-                    'url' => url('/'.$selectedLeague->name.'/'.str_slug($team->nickname)),
-                    'label' => $team->nickname,
-                    'selected' => $team->id == $selectedTeam->id ? true : false
-                ];
-            }
-
             $breadcrumbs[] = [
                 'url' => url('/'.$selectedLeague->name.'/'.str_slug($selectedTeam->nickname)),
                 'name' => ucwords($selectedTeam->nickname),
-                'options' => $teamOptions
             ];
 
-            $highlightsQuery->where('team_id', $selectedTeam->id);
+            $highlightsQuery->wherehas('game', function($q) use($selectedTeam) {
+                $q->where('home_team_id', $selectedTeam->id);
+                $q->orWhere('away_team_id', $selectedTeam->id);
+            });
         }
 
         if($gameUrlSegment) {
-            $selectedGame = $games->where('url_segment',$gameUrlSegment)->first();
-
-            foreach($games as $game) {
-                $gameOptions[] = [
-                    'url' => url('/'.$selectedLeague->name.'/'.str_slug($selectedTeam->nickname).'/'.$game->url_segment),
-                    'label' => $game->homeTeam->nickname.' vs '.$game->awayTeam->nickname.' - '.$game->start_date->format('M j y'),
-                    'selected' => $game->id == $selectedGame->id ? true : false
-                ];
-            }
+            $selectedGame = Games::where('url_segment', $gameUrlSegment)->firstOrFail();
 
             $breadcrumbs[] = [
                 'url' => url('/'.$selectedLeague->name.'/'.str_slug($selectedTeam->nickname).'/'.$selectedGame->url_segment),
                 'name' => $selectedGame->homeTeam->nickname.' vs '.$selectedGame->awayTeam->nickname,
-                'options' => $gameOptions
             ];
 
-            $highlightsQuery->whereHas('game', function($q) use($selectedGame){
-                $q->where('url_segment', $selectedGame->url_segment);
-            });
+            $highlightsQuery->where('game_id', $selectedGame->id);
         }
 
         $highlightsPaginated = $highlightsQuery->orderBy('created_at', 'DESC')->paginate(12);

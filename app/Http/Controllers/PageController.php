@@ -34,26 +34,28 @@ class PageController extends Controller
         $teamsWithHighlights->load(['league']);
         $popularTeams = [];
         foreach ($teamsWithHighlights as $team) {
-            $popularTeams[] = [
+            $popularTeams[$team->league->name][] = [
                 'name' => $team->nickname,
                 'url' => url('/' . $team->league->name . '/' . str_slug($team->nickname)),
                 'iconHtml' => $team->league->icon()
             ];
         }
 
-        // Recent Games
-        $gameIds = Highlights::select('game_id', \DB::raw('MAX(created_at) as most_recent'))
+        // Recent Highlights
+        $gameIds = Highlights::select('game_id', \DB::raw('COUNT(id) as total'))
+            ->where('created_at', '>', Carbon::now()->subHours(36))
+            ->orderByDesc('total')
             ->groupBy('game_id')
-            ->orderByDesc('most_recent')
             ->take(10)
             ->pluck('game_id');
 
+        // Get games of recent highlights
         $games = Games::whereIn('id', $gameIds)->get();
         $games->load(['homeTeam', 'awayTeam', 'league']);
 
         $recentGames = [];
         foreach ($games as $game) {
-            $recentGames[] = [
+            $recentGames[$game->league->name][] = [
                 'homeTeam' => [
                     'nickname' => $game->homeTeam->nickname,
                     'score' => $game->home_score,
@@ -71,8 +73,8 @@ class PageController extends Controller
         // Get id's of players with recent highlights and order by count
         $playerIds = PlayerHighlights::select('player_id', \DB::raw('COUNT(tweet_logs_id) as total'))
             ->where('created_at', '>', Carbon::now()->subHours(36))
-            ->groupBy('player_id')
             ->orderByDesc('total')
+            ->groupBy('player_id')
             ->take(10)
             ->pluck('player_id')
             ->toArray();
@@ -83,7 +85,7 @@ class PageController extends Controller
 
         $popularPlayers = [];
         foreach ($playersWithHighlights as $player) {
-            $popularPlayers[] = [
+            $popularPlayers[$player->team->league->name][] = [
                 'name' => $player->first_name . ' ' . $player->last_name,
                 'url' => $player->url(),
                 'iconHtml' => $player->team->league->icon()

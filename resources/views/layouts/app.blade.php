@@ -16,13 +16,10 @@
         gtag('config', 'UA-137036648-1');
     </script>
 
-    {{--Bulma--}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
     {{--Font Awesome--}}
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js"></script>
     {{--jQuery--}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     {{--jQuery UI--}}

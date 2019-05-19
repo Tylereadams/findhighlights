@@ -5,7 +5,7 @@
 
         @include('includes.search-bar')
 
-        <nav class="breadcrumb navbar" aria-label="breadcrumbs">
+        <nav class="breadcrumb navbar has-background-white" aria-label="breadcrumbs">
             <div class="navbar-item" style="float:left;">
                 <div class="control navbar-start has-icons-left">
                     <ul>
@@ -23,9 +23,9 @@
 
                 @foreach($groupedByGameHighlights as $gameHighlights)
                         <hr>
-                    <h5 class="subtitle is-5">{{ $gameHighlights->first()->game->title() }}</h5>
+                    <h5 class="subtitle is-5"><a href="{{ $gameHighlights->first()->game->url() }}">{{ $gameHighlights->first()->game->title() }}</a></h5>
 
-                    @foreach($gameHighlights->chunk(2) as $key => $chunk)
+                    @foreach($gameHighlights->chunk(1) as $key => $chunk)
                         <div class="columns">
                             @foreach($chunk as $highlight)
                                 <div class="column">
