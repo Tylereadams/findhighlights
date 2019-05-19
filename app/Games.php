@@ -44,6 +44,7 @@ class Games extends Model
 
     public function imageUrl()
     {
+        // TODO: Change betbuddies.co to something more legit
         return 'http://betbuddies.co/game/' . $this->url_segment . '/image';
     }
 }
