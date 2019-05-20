@@ -1,7 +1,7 @@
 <div class="card is-shady">
     <div class="card-image">
-            <video class="image" controls>
-                <source poster="{{ str_replace('.jpg', '.png', $highlight->media_url) }}" src="{{ $highlight->url() }}" type="video/mp4">
+            <video class="image" poster="{{ $highlight->media_url }}" controls>
+                <source src="{{ $highlight->url() }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
     </div>
