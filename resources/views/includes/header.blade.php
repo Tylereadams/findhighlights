@@ -3,7 +3,7 @@
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="/">
-                    <i class="fas fa-search"></i>
+                    <i class="fas fa-search"></i>&nbsp;<span class="title">Find Highlights</span>
                 </a>
             </div>
             {{--<div id="navbarMenu" class="navbar-menu">--}}

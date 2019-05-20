@@ -3,12 +3,9 @@
 @section('content')
     <nav class="hero-body">
         <div class="container has-text-centered">
-            <h1 class="title">
-                Find Highlights
+            <h1 class="title has-text-grey-light">
+                Search by player, team or game...
             </h1>
-            <h2 class="subtitle">
-                Search by player, game or team...
-            </h2>
 
             <section class="hero">
                 <div class="hero-body">
@@ -59,7 +56,7 @@
         <hr>
 
         <div class="container">
-            <h3 class="is-3 title has-text-grey-light"><i class="fas fa-fire-alt"></i> Trending</h3>
+            <h3 class="is-3 title has-text-grey-light"><i class="fas fa-fire-alt"></i> Trending Searches</h3>
 
             <div class="columns  is-multiline is-centered">
             <div class="column">

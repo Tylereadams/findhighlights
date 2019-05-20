@@ -204,6 +204,10 @@ class SearchController extends Controller
                     'url' => $player->url(),
                     'name' => $player->getFullName()
                 ]
+            ],
+            'metaTags' => [
+                'description' => 'View all '.$player->first_name.' '. $player->last_name.' highlights',
+                'url' => $player->url(),
             ]
         ];
 
