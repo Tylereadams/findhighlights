@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('metaTags')
+    @include('includes.metaTags', $metaTags)
+@endsection
+
 @section('content')
     <nav class="hero-body">
         <div class="container has-text-centered">
