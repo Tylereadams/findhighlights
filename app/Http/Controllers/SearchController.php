@@ -10,7 +10,7 @@ use App\Teams;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Players;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class SearchController extends Controller
 {
