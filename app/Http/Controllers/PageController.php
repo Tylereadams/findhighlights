@@ -20,12 +20,12 @@ class PageController extends Controller
             ->where('created_at', '>', Carbon::now()->subHours(36))
             ->groupBy('team_id')
             ->orderByDesc('total')
-            ->take(10)
+            ->take(5)
             ->pluck('team_id');
 
         if(!$teamIds) {
             $teamIds = Highlights::where('created_at', '>', Carbon::now()->subHours(72))
-                ->take(10)
+                ->take(5)
                 ->pluck('team_id');
         }
 
@@ -46,7 +46,7 @@ class PageController extends Controller
             ->where('created_at', '>', Carbon::now()->subHours(36))
             ->orderByDesc('total')
             ->groupBy('game_id')
-            ->take(10)
+            ->take(5)
             ->pluck('game_id');
 
         // Get games of recent highlights
@@ -75,7 +75,7 @@ class PageController extends Controller
             ->where('created_at', '>', Carbon::now()->subHours(36))
             ->orderByDesc('total')
             ->groupBy('player_id')
-            ->take(10)
+            ->take(5)
             ->pluck('player_id')
             ->toArray();
 

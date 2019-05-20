@@ -7,15 +7,9 @@
                 Search by player, team or game...
             </h1>
 
-            <section class="hero">
-                <div class="hero-body">
-                    <div class="container">
-                @include('includes.search-bar')
-                    </div>
-                </div>
-            </section>
+            @include('includes.search-bar')
 
-            <nav class="columns is-flex-mobile">
+            <nav class="columns is-flex-mobile has-padding-top-lg">
                 <div class="column">
                     <div>
                         <a href="/nba">
@@ -52,7 +46,6 @@
         </div>
 
         <br>
-
         <hr>
 
         <div class="container">
