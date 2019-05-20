@@ -1,5 +1,5 @@
 <meta property="og:title" content="{{ isset($title) ? $title : 'Find Highlights' }}">
-<meta property="og:description" content="{{ isset($description) ?: ''}}">
+<meta property="og:description" content="{{ isset($description) ? $description : ''}}">
 <meta property="og:image" content="{{ isset($imageUrl) ? $imageUrl : '' }}">
 <meta property="og:url" content="{{ isset($url) ? $url : url()->current() }}">
 
