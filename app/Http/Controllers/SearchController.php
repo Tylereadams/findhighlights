@@ -97,24 +97,28 @@ class SearchController extends Controller
 
         $textToSearch = $request->query('term');
 
-        $results = DB::select(
-            DB::raw('
-           SELECT search.id, search.text as label, search.category from (
-                      (select id, CONCAT(first_name, " ", last_name) as "text", "Players" as "category" from players
-                          WHERE CONCAT(first_name, " ", last_name) LIKE "%'.$textToSearch.'%" LIMIT 10)
-                    UNION
-                        (select id, CONCAT(location, " ", nickname) as "text", "Teams" as "category" from teams
-                          WHERE CONCAT(location, " ", nickname) LIKE "%'.$textToSearch.'%" LIMIT 10)
-                    UNION
-                        (select id, name as "text", "Leagues" as "category" from leagues
-                          WHERE name LIKE "%'.$textToSearch.'%")
-                    UNION
-                       (select games.id, CONCAT(homeTeam.nickname, " vs ", awayTeam.nickname, " ", DATE_FORMAT(games.start_date, "%e/%d/%Y")) as text, "Games" as "category" from games
-                            JOIN teams as homeTeam ON homeTeam.id = games.home_team_id
-                            JOIN teams as awayTeam ON awayTeam.id = games.away_team_id
-                          WHERE CONCAT(homeTeam.nickname, " vs ", awayTeam.nickname, " ", DATE_FORMAT(games.start_date, "%e/%d/%Y")) LIKE "%'.$textToSearch.'%" order by start_date DESC LIMIT 10)
-            ) as search
-        '));
+        $results = Cache::remember($textToSearch.'-text-to-search', 120, function () use($textToSearch) {
+                $results =  DB::select(
+                    DB::raw('
+               SELECT search.id, search.text as label, search.category from (
+                          (select id, CONCAT(first_name, " ", last_name) as "text", "Players" as "category" from players
+                              WHERE CONCAT(first_name, " ", last_name) LIKE "%'.$textToSearch.'%" LIMIT 10)
+                        UNION
+                            (select id, CONCAT(location, " ", nickname) as "text", "Teams" as "category" from teams
+                              WHERE CONCAT(location, " ", nickname) LIKE "%'.$textToSearch.'%" LIMIT 10)
+                        UNION
+                            (select id, name as "text", "Leagues" as "category" from leagues
+                              WHERE name LIKE "%'.$textToSearch.'%")
+                        UNION
+                           (select games.id, CONCAT(homeTeam.nickname, " vs ", awayTeam.nickname, " ", DATE_FORMAT(games.start_date, "%e/%d/%Y")) as text, "Games" as "category" from games
+                                JOIN teams as homeTeam ON homeTeam.id = games.home_team_id
+                                JOIN teams as awayTeam ON awayTeam.id = games.away_team_id
+                              WHERE CONCAT(homeTeam.nickname, " vs ", awayTeam.nickname, " ", DATE_FORMAT(games.start_date, "%e/%d/%Y")) LIKE "%'.$textToSearch.'%" order by start_date DESC LIMIT 10)
+                ) as search
+            '));
+
+                return $results;
+        });
 
         foreach($results as $result) {
             $categories[$result->category][] = $result->id;

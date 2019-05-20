@@ -92,10 +92,13 @@ class PageController extends Controller
             ];
         }
 
+        // Recent highlights
+        $recentHighlights = Highlights::latest()->take(3)->get();
         $data = [
             'recentGames' => $recentGames,
             'popularTeams' => $popularTeams,
-            'popularPlayers' => $popularPlayers
+            'popularPlayers' => $popularPlayers,
+            'recentHighlights' => $recentHighlights
         ];
 
         return view('welcome', $data);
