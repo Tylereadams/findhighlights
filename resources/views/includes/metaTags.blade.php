@@ -2,6 +2,8 @@
 <meta property="og:description" content="{{ isset($description) ? $description : ''}}">
 <meta property="og:image" content="{{ isset($imageUrl) ? $imageUrl : '' }}">
 <meta property="og:url" content="{{ isset($url) ? $url : url()->current() }}">
+<meta property="og:type" content="website" />
+
 
 <meta name="twitter:title" content="{{ isset($title) ? $title : 'Find Highlights' }}">
 <meta name="twitter:description" content="{{ isset($description) ? $description : '' }}">
