@@ -101,7 +101,6 @@ class PageController extends Controller
             'recentHighlights' => $recentHighlights,
             'metaTags' => [
                 'title' => 'FindHighlights.com',
-                'description' => 'Search for highlights of players, teams or games...',
                 'imageUrl' => asset('img/welcome-page.png'),
                 'url' => url()->current(),
             ]
