@@ -37,7 +37,7 @@ class PageController extends Controller
             $popularTeams[$team->league->name][] = [
                 'name' => $team->nickname,
                 'url' => url('/' . $team->league->name . '/' . str_slug($team->nickname)),
-                'iconHtml' => $team->league->icon()
+                'iconHtml' => $team->league->icon(),
             ];
         }
 
@@ -66,6 +66,7 @@ class PageController extends Controller
                 ],
                 'date' =>  $game->start_date->format('n/j'),
                 'iconHtml' => $game->league->icon(),
+                'period' => $game->getPeriodString(),
                 'url' => url('/' . $game->league->name . '/' . str_slug($game->homeTeam->nickname) . '/' . $game->url_segment)
             ];
         }

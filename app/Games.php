@@ -47,4 +47,13 @@ class Games extends Model
         // TODO: Change betbuddies.co to something more legit
         return 'http://betbuddies.co/game/' . $this->url_segment . '/image';
     }
+
+    public function getPeriodString()
+    {
+        if($this->ended_at) {
+            return 'Final';
+        }
+
+        return $this->league->getPeriodLabel($this->period);
+    }
 }

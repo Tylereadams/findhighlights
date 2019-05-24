@@ -78,7 +78,7 @@
                                 <p class="heading has-padding"><strong>{{ $league }}</strong></p>
                                 <ul>
                                     @foreach($leagueGames as $game)
-                                        <li><small>{{ $game['date'] }}</small> - <a href="{{ $game['url'] }}">{{ $game['awayTeam']['nickname'] }} {{ $game['awayTeam']['score'] }} @ {{ $game['homeTeam']['nickname'] }} {{ $game['homeTeam']['score'] }}</a></li>
+                                        <li><small>{{ $game['date'] }}</small> - <a href="{{ $game['url'] }}">{{ $game['awayTeam']['nickname'] }} {{ $game['awayTeam']['score'] }} @ {{ $game['homeTeam']['nickname'] }} {{ $game['homeTeam']['score'] }} &#8226; <small>{{ $game['period'] }}</small></a></li>
                                     @endforeach
                                 </ul>
                             @endforeach
