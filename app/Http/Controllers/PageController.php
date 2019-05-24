@@ -95,6 +95,7 @@ class PageController extends Controller
 
         // Recent highlights
         $recentHighlights = Highlights::latest()->take(3)->get();
+        $recentHighlights->load(['players', 'game.league', 'team', 'game.homeTeam']);
         $data = [
             'recentGames' => $recentGames,
             'popularTeams' => $popularTeams,
