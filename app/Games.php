@@ -8,6 +8,11 @@ class Games extends Model
 {
     protected $dates = ['start_date', 'ended_at'];
 
+    const UPCOMING = 1;
+    const IN_PROGRESS = 2;
+    const ENDED = 3;
+    const POSTPONED = 4;
+
     //
     public function homeTeam()
     {
@@ -55,5 +60,17 @@ class Games extends Model
         }
 
         return $this->league->getPeriodLabel($this->period);
+    }
+
+    public function getTitle()
+    {
+        $description = '';
+        if(in_array($this->status, [Games::ENDED, Games::IN_PROGRESS])) {
+            $description .= $this->awayTeam->nickname.' '.$this->away_score.' vs '.$this->homeTeam->nickname.' '.$this->home_score;
+        } else {
+            $description .= $this->awayTeam->nickname.' vs '.$this->homeTeam->nickname;
+        }
+
+        return $description;
     }
 }
