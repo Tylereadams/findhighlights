@@ -7,7 +7,7 @@
 @section('content')
     <nav class="hero-body">
         <div class="container has-text-centered">
-            <h1 class="title has-text-grey-light">
+            <h1 class="title">
                 Search by player, team or game...
             </h1>
 
@@ -16,7 +16,7 @@
             <nav class="columns is-flex-mobile has-padding-top-lg">
                 <div class="column">
                     <div>
-                        <a href="/nba">
+                        <a href="/nba" class="has-text-dark">
                             <p class="heading">NBA</p>
                             <p class="title"><i class="fas fa-basketball-ball"></i></p>
                         </a>
@@ -24,7 +24,7 @@
                 </div>
                 <div class="column">
                     <div>
-                        <a href="/nfl">
+                        <a href="/nfl" class="has-text-dark">
                             <p class="heading">NFL</p>
                             <p class="title"><i class="fas fa-football-ball"></i></p>
                         </a>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="column">
                     <div>
-                        <a href="/mlb">
+                        <a href="/mlb" class="has-text-dark">
                             <p class="heading">MLB</p>
                             <p class="title"><i class="fas fa-baseball-ball"></i></p>
                         </a>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="column">
                     <div>
-                        <a href="/nhl">
+                        <a href="/nhl" class="has-text-dark">
                             <p class="heading">NHL</p>
                             <p class="title"><i class="fas fa-hockey-puck"></i></p>
                         </a>
@@ -53,7 +53,7 @@
         <hr>
 
         <div class="container">
-            <h3 class="is-3 title has-text-grey-light"><i class="fas fa-fire-alt"></i> Recent Highlights</h3>
+            <h3 class="is-3 title"><i class="fas fa-fire-alt"></i> Recent Highlights</h3>
 
             <div class="columns is-multiline is-centered">
                 @foreach($recentHighlights as $highlight)
@@ -67,7 +67,7 @@
 
         <br>
         <div class="container">
-            <h3 class="is-3 title has-text-grey-light"><i class="fas fa-fire-alt"></i> Trending Searches</h3>
+            <h3 class="is-3 title"><i class="fas fa-fire-alt"></i> Trending Searches</h3>
 
             <div class="columns is-multiline is-centered">
                 <div class="column">

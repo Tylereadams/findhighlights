@@ -14,14 +14,18 @@
                 <div class="control navbar-start has-icons-left is-size-4">
                     <ul>
                         @foreach($breadcrumbs as $key => $breadcrumb)
-                            <li><a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['name'] }}</a></li>
+                            <li>
+                                @if($loop->last)
+                                    <a href="{{ $breadcrumb['url'] }}" class="has-text-weight-bold has-text-dark">{{ $breadcrumb['name'] }}</a>
+                                @else
+                                    <a href="{{ $breadcrumb['url'] }}" class="has-text-dark">{{ $breadcrumb['name'] }}</a>
+                                @endif
+                            </li>
                         @endforeach
                     </ul>
                 </div>
             </div>
         </nav>
-
-        <h2>{{ end($breadcrumbs)['name'] }}</h2>
 
         <div class="hero-body">
             @foreach($groupedHighlights as $date => $groupedByGameHighlights)
