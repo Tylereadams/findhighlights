@@ -66,7 +66,7 @@ class Games extends Model
     {
         $description = '';
         if(in_array($this->status, [Games::ENDED, Games::IN_PROGRESS])) {
-            $description .= $this->awayTeam->nickname.' '.$this->away_score.' vs '.$this->homeTeam->nickname.' '.$this->home_score;
+            $description .= $this->awayTeam->nickname.' '.$this->away_score.' vs '.$this->homeTeam->nickname.' '.$this->home_score.' - '.$this->getPeriodString();
         } else {
             $description .= $this->awayTeam->nickname.' vs '.$this->homeTeam->nickname;
         }

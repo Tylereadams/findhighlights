@@ -1,6 +1,8 @@
 <meta property="og:title" content="{{ isset($title) ? $title : 'Find Highlights' }}">
 <meta property="og:description" content="{{ isset($description) ? $description : 'Search for highlights of games, players or teams. Free & simple, no login necessary'}}">
 <meta property="og:image" content="{{ isset($imageUrl) ? $imageUrl : '' }}">
+<meta property="og:image:width" content="1008">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="{{ isset($url) ? $url : url()->current() }}">
 <meta property="og:type" content="website" />
 
