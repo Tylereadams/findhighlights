@@ -78,7 +78,7 @@ class SearchController extends Controller
             'breadcrumbs' => $breadcrumbs,
             'highlightsPaginated' => $highlightsPaginated,
             'metaTags' => [
-                'title' => $selectedGame->getTitle(),
+                'title' => isset($selectedGame) ? $selectedGame->getTitle() : strtoupper($selectedLeague->name),
                 'description' => 'View all highlights',
                 'imageUrl' => isset($selectedGame) ? $selectedGame->imageUrl() : '',
                 'url' => end($breadcrumbs)['url'],
