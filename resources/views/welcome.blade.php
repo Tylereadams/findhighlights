@@ -89,14 +89,16 @@
                 <div class="column">
                     <div>
                         <h4 class="title is-4 has-text-grey-light">Teams</h4>
-                        <div class="has-padding-left-lg">
+                        <div class="has-padding-left-lg columns is-mobile">
                             @foreach($popularTeams as $league => $leagueTeams)
-                                <p class="heading"><strong>{{ $league }}</strong></p>
-                                <ul>
-                                    @foreach($leagueTeams as $team)
-                                        <li><small>{!! $team['iconHtml'] !!}</small> <a href="{{ $team['url'] }}">{{ $team['name'] }}</a></li>
-                                    @endforeach
-                                </ul>
+                                <div class="column">
+                                    <p class="heading"><strong>{{ $league }}</strong></p>
+                                    <ul>
+                                        @foreach($leagueTeams as $team)
+                                            <li><small>{!! $team['iconHtml'] !!}</small> <a href="{{ $team['url'] }}">{{ $team['name'] }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             @endforeach
                         </div>
                     </div>
@@ -105,14 +107,16 @@
                 <div class="column">
                     <div>
                         <h4 class="title is-4 has-text-grey-light">Players</h4>
-                        <div class="has-padding-left-lg">
+                        <div class="has-padding-left-lg columns is-mobile">
                             @foreach($popularPlayers as $league => $leaguePlayers)
-                                <p class="heading"><strong>{{ $league }}</strong></p>
-                                <ul>
-                                    @foreach($leaguePlayers as $player)
-                                        <li><small>{!! $player['iconHtml'] !!}</small> <a href="{{ $player['url'] }}">{{ $player['name'] }}</a></li>
-                                    @endforeach
-                                </ul>
+                                <div class="column">
+                                    <p class="heading"><strong>{{ $league }}</strong></p>
+                                    <ul>
+                                        @foreach($leaguePlayers as $player)
+                                            <li><small>{!! $player['iconHtml'] !!}</small> <a href="{{ $player['url'] }}">{{ $player['name'] }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                              @endforeach
                         </div>
                     </div>
