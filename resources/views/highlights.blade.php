@@ -29,13 +29,13 @@
 
         <div class="hero-body">
             @foreach($groupedHighlights as $date => $groupedByGameHighlights)
-                <h3 class="title">{{ $date }}</h3>
+                <h4 class="subtitle is-4 has-text-grey-light">{{ $date }}</h4>
 
                 @foreach($groupedByGameHighlights as $gameHighlights)
                         <hr>
-                    <h4 class="subtitle is-4"><a href="{{ $gameHighlights->first()->game->url() }}">{{ $gameHighlights->first()->game->title() }}</a></h4>
+                    <h3 class="title is-3"><a href="{{ $gameHighlights->first()->game->url() }}" class="has-text-dark">{{ $gameHighlights->first()->game->title() }}</a></h3>
 
-                    @foreach($gameHighlights->chunk(1) as $key => $chunk)
+                    @foreach($gameHighlights->chunk(2) as $key => $chunk)
                         <div class="columns">
                             @foreach($chunk as $highlight)
                                 <div class="column">
@@ -49,7 +49,10 @@
             @endforeach
         </div>
 
-        {{ $highlightsPaginated->links('vendor.pagination.bulma') }}
+        <div>
+            {{ $highlightsPaginated->links('vendor.pagination.bulma') }}
+
+        </div>
 
     </section>
 
