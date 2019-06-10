@@ -6,8 +6,6 @@ use Illuminate\Console\Command;
 use App\Highlights;
 use GuzzleHttp\RequestOptions;
 
-require 'vendor/autoload.php';
-
 class CommandUploadTweetsToGfycat extends Command
 {
     /**
