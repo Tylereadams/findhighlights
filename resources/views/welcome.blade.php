@@ -126,3 +126,13 @@
 
     </div>
 @stop
+
+
+@push('scripts')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.0/clipboard.min.js"></script>
+    <script>
+        $(function(){
+            var clipboard = new Clipboard('.button');
+        });
+    </script>
+@endpush

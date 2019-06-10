@@ -54,6 +54,11 @@ class CommandUploadTweetsToGfycat extends Command
             return "No highlights.\n";
         }
 
+        $finishedCount = Highlights::whereNotNull('gfycat_code')->count();
+        $leftToGoCount = $highlights->count();
+        $totalCount = ($finishedCount + $leftToGoCount);
+
+        echo $finishedCount." / ". $totalCount." completed. ".round(($finishedCount / $totalCount) * 100)."% \n";
         $client = new \GuzzleHttp\Client();
 
         foreach($highlights as $highlight) {
