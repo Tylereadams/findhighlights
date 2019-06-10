@@ -66,6 +66,8 @@
 
             var clipboard = new Clipboard('.button');
 
+
+
             @foreach($breadcrumbs as $key => $breadcrumb)
                 // bind change event to select
                 $('#{{ str_slug($breadcrumb['name']) }}-select').on('change', function () {
@@ -77,5 +79,11 @@
                 });
             @endforeach
         });
+
+        function SelectAll(id)
+        {
+            document.getElementById(id).focus();
+            document.getElementById(id).select();
+        }
     </script>
 @endpush
