@@ -47,7 +47,9 @@ class CommandUploadTweetsToGfycat extends Command
     public static function uploadTweets()
     {
         $highlights = Highlights::whereNull('gfycat_code')
+            ->whereNotNull('downloaded')
             ->orderByDesc('created_at')
+            ->take(20)
             ->get();
 
         if(!$highlights) {
@@ -55,8 +57,7 @@ class CommandUploadTweetsToGfycat extends Command
         }
 
         $finishedCount = Highlights::whereNotNull('gfycat_code')->count();
-        $leftToGoCount = $highlights->count();
-        $totalCount = ($finishedCount + $leftToGoCount);
+        $totalCount = Highlights::count();
 
         echo $finishedCount." / ". $totalCount." completed. ".round(($finishedCount / $totalCount) * 100)."% \n";
         $client = new \GuzzleHttp\Client();
