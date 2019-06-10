@@ -74,4 +74,13 @@ class Highlights extends Model
     {
         return Storage::disk('ocean')->url($this->getVideoPath());
     }
+
+    public function gifUrl()
+    {
+        if(!$this->gfycat_code) {
+            return '';
+        }
+
+        return 'https://thumbs.gfycat.com/'.$this->gfycat_code.'-size_restricted.gif';
+    }
 }

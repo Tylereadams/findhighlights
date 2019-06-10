@@ -59,8 +59,13 @@
 @stop
 
 @push('scripts')
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.0/clipboard.min.js"></script>
     <script>
         $(function(){
+
+            var clipboard = new Clipboard('.button');
+
             @foreach($breadcrumbs as $key => $breadcrumb)
                 // bind change event to select
                 $('#{{ str_slug($breadcrumb['name']) }}-select').on('change', function () {
