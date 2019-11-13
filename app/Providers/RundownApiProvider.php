@@ -25,7 +25,7 @@ class RundownApiProvider extends ServiceProvider
         'STATUS_SCHEDULED' => Games::UPCOMING,
         'STATUS_IN_PROGRESS' => Games::IN_PROGRESS,
         'STATUS_FINAL' => Games::ENDED,
-//        '' => Games::POSTPONED,
+        'STATUS_POSTPONED' => Games::POSTPONED,
     ];
 
     public function __construct()
@@ -83,7 +83,7 @@ class RundownApiProvider extends ServiceProvider
         $mappedAwayTeam = $teamMapper->mapteam($awayTeam->mascot, $league);
 
         // Bovada odds
-        $odds = $game->lines->{2};
+        $odds = isset($game->lines->{2}) ?: $game->lines->{1};
 
         $gameData = [
             'home_team_id'  => (int) $mappedHomeTeam->id,
@@ -91,8 +91,8 @@ class RundownApiProvider extends ServiceProvider
             'league_id'     => $league->id,
             'home_score'    => $game->score->event_status == 'STATUS_SCHEDULED' ? null : $game->score->score_home,
             'away_score'    => $game->score->event_status == 'STATUS_SCHEDULED' ? null : $game->score->score_away,
-            'home_spread' => $odds->spread->point_spread_home,
-            'away_spread' => $odds->spread->point_spread_away,
+            'home_spread' => isset($odds->spread->point_spread_home) ?: null,
+            'away_spread' => isset($odds->spread->point_spread_away) ?: null,
             'broadcast'     => $game->score->broadcast,
             'period'        => $game->score->game_period > 0 ? $game->score->game_period : NULL, // Returns 0 sometimes, show NULL instead
             'status'     => $this->statusMapping[$game->score->event_status],
@@ -103,21 +103,21 @@ class RundownApiProvider extends ServiceProvider
         return $gameData;
     }
 
-    private function mapTeamData($team)
-    {
-        $twitter = Twitter::getUsersSearch(['q' => $team->location.' '.$team->nickname]);
-
-        return [
-            'nickname' => $team->mascot,
-//            'hashtag' => $team->hashtag,
-            'location' => $team->name,
-//            'latitude' => $team->latitude,
-//            'longitude' => $team->longitude,
-//            'league_id' => $league->id,
-//            'colors' => $team->colors,
-//            'slug' => $team->slug,
-            'twitter' => $twitter[0]->screen_name
-        ];
-    }
+//    private function mapTeamData($team)
+//    {
+//        $twitter = Twitter::getUsersSearch(['q' => $team->location.' '.$team->nickname]);
+//
+//        return [
+//            'nickname' => $team->mascot,
+////            'hashtag' => $team->hashtag,
+//            'location' => $team->name,
+////            'latitude' => $team->latitude,
+////            'longitude' => $team->longitude,
+////            'league_id' => $league->id,
+////            'colors' => $team->colors,
+////            'slug' => $team->slug,
+//            'twitter' => $twitter[0]->screen_name
+//        ];
+//    }
 
 }

@@ -24,6 +24,7 @@ class TeamMapperProvider extends ServiceProvider
             $q->where('nickname', 'LIKE', '%'.$teamName.'%');
             $q->orWhere('location', 'LIKE', '%'.$teamName.'%');
             $q->orwhere('twitter', 'LIKE', '%'.$teamName.'%');
+            $q->orwhere('hashtag', 'LIKE', '%'.$teamName.'%');
         })->first();
     }
 }
