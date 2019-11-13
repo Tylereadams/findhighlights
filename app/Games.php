@@ -8,6 +8,8 @@ class Games extends Model
 {
     protected $dates = ['start_date', 'ended_at'];
 
+    protected $guarded = [];
+
     const UPCOMING = 1;
     const IN_PROGRESS = 2;
     const ENDED = 3;
@@ -58,6 +60,8 @@ class Games extends Model
         if($this->ended_at) {
             return 'Final';
         }
+
+
 
         return $this->league->getPeriodLabel($this->period);
     }

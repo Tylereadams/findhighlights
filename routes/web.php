@@ -19,3 +19,7 @@ Route::get('/players/{name}', 'SearchController@player');
 
 Route::get('/{league}/{team?}/{game?}', 'SearchController@index');
 
+
+Route::get('import', function(){
+    dd(\Artisan::call('importer:import-games'));
+});
