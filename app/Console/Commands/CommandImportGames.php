@@ -51,6 +51,8 @@ class CommandImportGames extends Command
 
         foreach($leagues as $league) {
 
+            echo 'Searching '.$league->name." games\n";
+
             // Iterate over the days
             foreach($period as $date) {
 
@@ -74,6 +76,7 @@ class CommandImportGames extends Command
                     continue;
                 }
 
+                echo $date->format('m-d-Y')."\n";
                 $gamesByDate = $dataSource->getGamesByDate($date, $league);
 
                 foreach($gamesByDate as $game) {
