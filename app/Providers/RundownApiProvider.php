@@ -46,17 +46,18 @@ class RundownApiProvider extends ServiceProvider
         //map league
         $rundownLeagueId = $this->leagueMapping[$league->id];
 
-        $results = Cache::remember('game-data-'.$date->format('YYYY-mm-dd').'-'.$rundownLeagueId, 60 * 60 * 12, function()use($rundownLeagueId, $date){
+//        $results = Cache::remember('game-data-'.$date->format('YYYY-mm-dd').'-'.$rundownLeagueId, 60 * 60 * 12, function()use($rundownLeagueId, $date){
             $res = $this->client->request('GET', 'sports/'.$rundownLeagueId.'/events/'.$date->toIso8601String(), [
                 'query' => [
                     'include' => 'all_periods',
                     'include' => 'scores',
+                    'offset' => -300
                 ]
             ]);
             $results = json_decode($res->getBody());
 
-            return $results;
-        });
+//            return $results;
+//        });
 
         $games = [];
         foreach($results->events as $game) {
@@ -83,7 +84,13 @@ class RundownApiProvider extends ServiceProvider
         $mappedAwayTeam = $teamMapper->mapteam($awayTeam->mascot, $league);
 
         // Bovada odds
-        $odds = isset($game->lines->{2}) ?: $game->lines->{1};
+        $oddsMakers = [2, 1, 3, 4, 5, 6 ,7, 8, 9];
+        foreach($oddsMakers as $oddsMaker) {
+            if(isset($game->lines->{$oddsMaker})){
+                $odds = $game->lines->{$oddsMaker};
+                break;
+            }
+        }
 
         $gameData = [
             'home_team_id'  => (int) $mappedHomeTeam->id,

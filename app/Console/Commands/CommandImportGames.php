@@ -16,7 +16,7 @@ class CommandImportGames extends Command
      *
      * @var string
      */
-    protected $signature = 'importer:import-games';
+    protected $signature = 'importer:import-games {date=now}';
 
     /**
      * The console command description.
@@ -44,17 +44,18 @@ class CommandImportGames extends Command
     {
         //
         $leagues = Leagues::all();
+        $date = Carbon::parse($this->argument('date'));
 
         $dataSource = new RundownApiProvider();
 
-        $period = CarbonPeriod::create(Carbon::now()->subDay(120), Carbon::now());
+//        $period = CarbonPeriod::create(Carbon::parse($date), Carbon::now());
 
         foreach($leagues as $league) {
 
             echo 'Searching '.$league->name." games\n";
 
             // Iterate over the days
-            foreach($period as $date) {
+//            foreach($period as $date) {
 
                 // NFL Doesn't play on Tues, Wed, Fri or Sat so skip it.
                 if($league->id == Leagues::NFL_ID && in_array($date->dayOfWeek, [2,3,5,6]) && !in_array($date->month, [9,10,11,12,1,2])){
@@ -76,11 +77,10 @@ class CommandImportGames extends Command
                     continue;
                 }
 
-                echo $date->format('m-d-Y')."\n";
+                echo $date->format('Y-m-d')."\n";
                 $gamesByDate = $dataSource->getGamesByDate($date, $league);
 
                 foreach($gamesByDate as $game) {
-
                     $fieldsToUpdate = [
                         'home_score'    => $game['home_score'],
                         'away_score'    => $game['away_score'],
@@ -105,7 +105,7 @@ class CommandImportGames extends Command
                     ], $fieldsToUpdate);
                 }
 
-            }
+//            }
         }
 
     }
