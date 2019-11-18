@@ -102,7 +102,7 @@ class RundownApiProvider extends ServiceProvider
             'away_spread' => isset($odds->spread->point_spread_away) ?: null,
             'broadcast'     => $game->score->broadcast,
             'period'        => $game->score->game_period > 0 ? $game->score->game_period : NULL, // Returns 0 sometimes, show NULL instead
-            'status'     => isset($this->statusMapping[$game->score->event_status]) ?: null,
+            'status'     => $this->statusMapping[$game->score->event_status] ? $this->statusMapping[$game->score->event_status] : null,
 //            'ended_at'      => $game->score->event_status == 'STATUS_FINAL' ? Carbon::parse($game->event_date, 'UTC')->timezone('America/New_York')->addHours(4)->format('Y-m-d H:i:s') : null,
             'start_date'    => Carbon::parse($game->event_date, 'UTC')->timezone('America/New_York')->format('Y-m-d H:i:s')
         ];

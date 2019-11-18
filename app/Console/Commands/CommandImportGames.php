@@ -87,7 +87,7 @@ class CommandImportGames extends Command
                         'broadcast'     => $game['broadcast'],
                         'period'        => $game['period'],
                         'status'        => $game['status'],
-                        'ended_at'      => NULL
+                        'ended_at'      => $game['status'] == Games::ENDED ? Carbon::parse($game['start_date'])->addHours(4) : null
                     ];
 
                     // Only update spreads if the start date is older than 12 hours ago, spreads reset to 0 after some time
