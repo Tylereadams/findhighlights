@@ -26,6 +26,12 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('fh:upload-tweets')
                   ->everyMinute();
+
+         // Import games for today 3 times per day
+        $schedule->command('importer:import-games')
+            ->twiceDaily(17, 24);
+        $schedule->command('importer:import-games')
+            ->daily(1);
     }
 
     /**
