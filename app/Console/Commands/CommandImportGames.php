@@ -91,10 +91,8 @@ class CommandImportGames extends Command
                     ];
 
                     // Only update spreads if the start date is older than 12 hours ago, spreads reset to 0 after some time
-                    if(strtotime($game['start_date']) < strtotime('-12 hours')){
-                        $fieldsToUpdate['home_spread'] = $game['home_spread'];
-                        $fieldsToUpdate['away_spread'] = $game['away_spread'];
-                    }
+                    $fieldsToUpdate['home_spread'] = $game['home_spread'];
+                    $fieldsToUpdate['away_spread'] = $game['away_spread'];
 
                     // Update or create
                     Games::updateOrCreate([
