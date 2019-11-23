@@ -84,15 +84,13 @@ class CommandImportGames extends Command
                     $fieldsToUpdate = [
                         'home_score'    => $game['home_score'],
                         'away_score'    => $game['away_score'],
+                        'home_spread' => $game['home_spread'],
+                        'away_spread' => $game['away_spread'],
                         'broadcast'     => $game['broadcast'],
                         'period'        => $game['period'],
                         'status'        => $game['status'],
                         'ended_at'      => $game['status'] == Games::ENDED ? Carbon::parse($game['start_date'])->addHours(4) : null
                     ];
-
-                    // Only update spreads if the start date is older than 12 hours ago, spreads reset to 0 after some time
-                    $fieldsToUpdate['home_spread'] = $game['home_spread'];
-                    $fieldsToUpdate['away_spread'] = $game['away_spread'];
 
                     // Update or create
                     Games::updateOrCreate([

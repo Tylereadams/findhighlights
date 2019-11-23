@@ -98,8 +98,8 @@ class RundownApiProvider extends ServiceProvider
             'league_id'     => $league->id,
             'home_score'    => $game->score->event_status == 'STATUS_SCHEDULED' ? null : $game->score->score_home,
             'away_score'    => $game->score->event_status == 'STATUS_SCHEDULED' ? null : $game->score->score_away,
-            'home_spread' => isset($odds->spread->point_spread_home) ?: null,
-            'away_spread' => isset($odds->spread->point_spread_away) ?: null,
+            'home_spread' => isset($odds->spread->point_spread_home) ? $odds->spread->point_spread_home : null,
+            'away_spread' => isset($odds->spread->point_spread_away) ? $odds->spread->point_spread_away : null,
             'broadcast'     => $game->score->broadcast,
             'period'        => $game->score->game_period > 0 ? $game->score->game_period : NULL, // Returns 0 sometimes, show NULL instead
             'status'     => $this->statusMapping[$game->score->event_status] ? $this->statusMapping[$game->score->event_status] : null,
