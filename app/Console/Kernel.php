@@ -30,9 +30,9 @@ class Kernel extends ConsoleKernel
 
          // Import games for today 4 times per day
         $schedule->command('importer:import-games')
-            ->twiceDaily(17, 24);
+            ->twiceDaily(21, 24);
         $schedule->command('importer:import-games')
-            ->daily(2);
+            ->twiceDaily(5, 18);
         $schedule->command('importer:import-games "'.Carbon::now()->yesterday()->format('YYYY-mm-dd').'"')
             ->daily(2);
     }
