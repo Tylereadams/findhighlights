@@ -26,6 +26,7 @@ class RundownApiProvider extends ServiceProvider
         'STATUS_IN_PROGRESS' => Games::IN_PROGRESS,
         'STATUS_FINAL' => Games::ENDED,
         'STATUS_POSTPONED' => Games::POSTPONED,
+        'STATUS_HALFTIME' => null
     ];
 
     public function __construct()
