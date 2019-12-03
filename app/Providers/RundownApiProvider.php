@@ -52,7 +52,7 @@ class RundownApiProvider extends ServiceProvider
                 'query' => [
                     'include' => 'all_periods',
                     'include' => 'scores',
-                    'offset' => -300
+                    'offset' => 300
                 ]
             ]);
             $results = json_decode($res->getBody());
