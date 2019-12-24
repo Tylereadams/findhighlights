@@ -4,8 +4,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{--<link href="{{ asset('css/hero.css') }}" rel="stylesheet">--}}
-
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137036648-1"></script>
     <script>
@@ -24,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
 
 
-    {{--Custom--}}
+    {{--Custom CSS--}}
     <style type="text/css">
         a:visited, a:link, a:active
         {
@@ -40,7 +38,18 @@
     {{--Font Awesome--}}
     <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js"></script>
 
-    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+    {{--Google Fonts--}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        ul.navbar-nav .active{
+            border-bottom: 5px solid black;
+        //text-decoration: underline;
+        }
+    </style>
 
 
     @yield('metaTags')
