@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    <div class="card-footer bg-white">
+    <div class="card-footer p-2 bg-white">
         @if($highlight->players->count())
             @foreach($highlight->players as $player)
                 <span class="badge badge-light">

@@ -63,7 +63,7 @@
                     <ul class="list-group list-group-flush pb-5">
                         @foreach($leaguePlayers as $player)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="{{ $player['url'] }}">{{ $player['name'] }}</a> <span class="badge badge-primary badge-pill">{{ $player['highlightCount'] }}</span>
+                                <a href="{{ $player['url'] }}">{{ $player['name'] }}</a> <span class="badge badge-secondary badge-pill">{{ $player['highlightCount'] }}</span>
                             </li>
                         @endforeach
                     </ul>
