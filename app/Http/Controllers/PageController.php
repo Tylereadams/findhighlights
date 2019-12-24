@@ -46,7 +46,7 @@ class PageController extends Controller
             ->where('created_at', '>', Carbon::now()->subHours(36))
             ->orderByDesc('total')
             ->groupBy('game_id')
-            ->take(5)
+            ->take(10)
             ->pluck('game_id');
 
         // Get games of recent highlights
@@ -64,6 +64,7 @@ class PageController extends Controller
                     'nickname' => $game->awayTeam->nickname,
                     'score' => $game->away_score,
                 ],
+                'highlightCount' => $game->highlights->count(),
                 'date' =>  $game->start_date->format('n/j'),
                 'iconHtml' => $game->league->icon(),
                 'period' => $game->getPeriodString(),
@@ -76,7 +77,7 @@ class PageController extends Controller
             ->where('created_at', '>', Carbon::now()->subHours(36))
             ->orderByDesc('total')
             ->groupBy('player_id')
-            ->take(5)
+            ->take(10)
             ->pluck('player_id')
             ->toArray();
 
@@ -89,6 +90,7 @@ class PageController extends Controller
             $popularPlayers[$player->team->league->name][] = [
                 'name' => $player->first_name . ' ' . $player->last_name,
                 'url' => $player->url(),
+                'highlightCount' => $player->highlights->count(),
                 'iconHtml' => $player->team->league->icon()
             ];
         }
@@ -99,6 +101,7 @@ class PageController extends Controller
         $data = [
             'recentGames' => $recentGames,
             'popularTeams' => $popularTeams,
+            'activeTab' => null,
             'popularPlayers' => $popularPlayers,
             'recentHighlights' => $recentHighlights,
             'metaTags' => [

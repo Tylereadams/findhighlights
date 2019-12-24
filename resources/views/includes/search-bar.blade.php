@@ -1,18 +1,24 @@
-<div class="field level has-padding-bottom-lg">
-    <div class="level-item">
-        <div class="control" style="width: 100%;">
+{{--<div class="field level has-padding-bottom-lg">--}}
+    {{--<div class="level-item">--}}
+        {{--<div class="control" style="width: 100%;">--}}
             {{--<span class="icon is-left is-medium">--}}
               {{--<i class="fas fa-search fa-2x"></i>--}}
             {{--</span>--}}
-            <input id="search" class="input is-info has-padding-lg is-large" type="text" placeholder="Ex: 'Browns', 'Baker Mayfield' or 'Warriors vs Rockets'">
-        </div>
+            {{--<input id="search" class="input is-info has-padding-lg is-large" type="text" placeholder="Ex: 'Browns', 'Baker Mayfield' or 'Warriors vs Rockets'">--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</div>--}}
+
+<div class="input-group">
+    <div class="input-group-prepend">
+        <span class="input-group-text rounded-0" id="inputGroup-sizing-default"><i class="fas fa-search" id="search-bar-icon"></i></span>
     </div>
+    <input id="search" class="form-control rounded-0" type="text" placeholder="Ex: 'Browns', 'Nick Chubb', etc...">
 </div>
 
 @push('scripts')
     <script>
         $(function(){
-
             $.widget( "custom.catcomplete", $.ui.autocomplete, {
                 _create: function() {
                     this._super();
@@ -60,6 +66,12 @@
                 },
                 open: function(event, ui) {
                     $('.dropdown-header').off('menufocus hover mouseover mouseenter');
+                    $('#search-bar-icon').removeClass('fa-spin fa-spinner');
+                    $('#search-bar-icon').addClass('fa-search');
+                },
+                search: function( event, ui ) {
+                    $('#search-bar-icon').removeClass('fa-search');
+                    $('#search-bar-icon').addClass('fa-spinner fa-spin');
                 },
                 select: function( event, ui ) {
                     window.location.href = ui.item.url;

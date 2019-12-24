@@ -7,51 +7,31 @@
 @section('content')
     <section class="container">
 
-        @include('includes.search-bar')
-
-        <nav class="breadcrumb navbar has-background-white" aria-label="breadcrumbs">
-            <div class="navbar-item" style="float:left;">
-                <div class="control navbar-start has-icons-left is-size-4">
-                    <ul>
-                        @foreach($breadcrumbs as $key => $breadcrumb)
-                            <li>
-                                @if($loop->last)
-                                    <a href="{{ $breadcrumb['url'] }}" class="has-text-weight-bold has-text-dark">{{ $breadcrumb['name'] }}</a>
-                                @else
-                                    <a href="{{ $breadcrumb['url'] }}" class="has-text-dark">{{ $breadcrumb['name'] }}</a>
-                                @endif
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
+        <nav aria-label="breadcrumb" class="pt-2">
+            <ol class="breadcrumb bg-white">
+                @foreach($breadcrumbs as $key => $breadcrumb)
+                    <li class="breadcrumb-item {{ $loop->last ? 'active' : '' }}" aria-current="page"><a href="{{ $breadcrumb['url'] }}" class="text-secondary">{{ $breadcrumb['name'] }}</a></li>
+                @endforeach
+            </ol>
         </nav>
 
-        <div class="hero-body">
             @foreach($groupedHighlights as $date => $groupedByGameHighlights)
-                <h4 class="subtitle is-4 has-text-grey-light">{{ $date }}</h4>
-
                 @foreach($groupedByGameHighlights as $gameHighlights)
-                        <hr>
-                    <h3 class="title is-3"><a href="{{ $gameHighlights->first()->game->url() }}" class="has-text-dark">{{ $gameHighlights->first()->game->title() }}</a></h3>
+                    <h4 class="title py-2"><a class="text-dark" href="{{ $gameHighlights->first()->game->url() }}">{{ $gameHighlights->first()->game->getTitle() }}</a> <small class="text-secondary">{{ $date }}</small></h4>
+                    <div class="card-columns">
+                        @foreach($gameHighlights as $highlight)
+                                @include('partials.highlight')
+                        @endforeach
+                    </div>
 
-                    @foreach($gameHighlights->chunk(2) as $key => $chunk)
-                        <div class="columns">
-                            @foreach($chunk as $highlight)
-                                <div class="column">
-                                    @include('partials.highlight')
-                                </div>
-                            @endforeach
-                        </div>
-                    @endforeach
+                    <hr class="pb-5 mt-5">
+
                 @endforeach
 
             @endforeach
-        </div>
 
-        <div>
-            {{ $highlightsPaginated->links('vendor.pagination.bulma') }}
-
+        <div class="row justify-content-center">
+            {{ $highlightsPaginated->links('vendor.pagination.simple-bootstrap-4') }}
         </div>
 
     </section>

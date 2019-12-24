@@ -44,10 +44,10 @@ class Games extends Model
         return url('/'.$this->league->name.'/'.str_slug($this->homeTeam->nickname).'/'.str_slug($this->url_segment));
     }
 
-    public function title()
-    {
-        return $this->awayTeam->nickname . ' ' . ($this->status > 1 ? $this->away_score : '') . ' @ ' . $this->homeTeam->nickname . ' ' . ($this->status > 1 ? $this->home_score : '') . ($this->ended_at ? ' - Final' : '');
-    }
+//    public function title()
+//    {
+//        return $this->awayTeam->nickname . ' ' . ($this->status > 1 ? $this->away_score : '') . ' @ ' . $this->homeTeam->nickname . ' ' . ($this->status > 1 ? $this->home_score : '');
+//    }
 
     public function imageUrl()
     {
@@ -70,9 +70,9 @@ class Games extends Model
     {
         $description = '';
         if(in_array($this->status, [Games::ENDED, Games::IN_PROGRESS])) {
-            $description .= $this->awayTeam->nickname.' '.$this->away_score.' vs '.$this->homeTeam->nickname.' '.$this->home_score.' - '.$this->getPeriodString();
+            $description .= $this->awayTeam->nickname.' '.$this->away_score.' @ '.$this->homeTeam->nickname.' '.$this->home_score.' '.$this->getPeriodString();
         } else {
-            $description .= $this->awayTeam->nickname.' vs '.$this->homeTeam->nickname;
+            $description .= $this->awayTeam->nickname.' @ '.$this->homeTeam->nickname;
         }
 
         return $description;

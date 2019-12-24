@@ -64,7 +64,7 @@ class SearchController extends Controller
             $highlightsQuery->where('game_id', $selectedGame->id);
         }
 
-        $highlightsPaginated = $highlightsQuery->orderBy('created_at', 'DESC')->paginate(12);
+        $highlightsPaginated = $highlightsQuery->orderBy('created_at', 'DESC')->paginate(24);
         $highlightsPaginated->load(['game.league', 'game.awayTeam', 'game.homeTeam', 'team.league', 'players']);
 
         $groupedHighlights = $highlightsPaginated->groupBy(function($highlight){
@@ -76,6 +76,7 @@ class SearchController extends Controller
         $data = [
             'groupedHighlights' => $groupedHighlights,
             'breadcrumbs' => $breadcrumbs,
+            'activeTab' => strtolower($selectedLeague->name),
             'highlightsPaginated' => $highlightsPaginated,
             'metaTags' => [
                 'title' => isset($selectedGame) ? $selectedGame->getTitle() : strtoupper($selectedLeague->name),
@@ -120,6 +121,7 @@ class SearchController extends Controller
                 return $results;
         });
 
+        $categories = [];
         foreach($results as $result) {
             $categories[$result->category][] = $result->id;
         }
@@ -134,7 +136,6 @@ class SearchController extends Controller
                        $models->push([
                            'url' => $player->url(),
                            'label' => $player->getFullName(),
-                           'icon' => $player->team->league->icon(),
                            'category' => 'Players'
                        ]);
                     });
@@ -193,6 +194,7 @@ class SearchController extends Controller
         });
 
         $data = [
+            'activeTab' => strtolower($player->team->league->name),
             'highlightsPaginated' => $highlightsPaginated,
             'groupedHighlights' => $groupedHighlights,
             'breadcrumbs' => [
