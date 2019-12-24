@@ -6,10 +6,10 @@
     </div>
 
     <div>
-        <a class="navbar-brand" href="/">FindHighlights <i class="fas fa-video"></i></a>
+        <a class="navbar-brand" href="/"><i class="fas fa-video"></i></a>
     </div>
 
-    <div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item {{ $activeTab == 'nba' ? 'active' : '' }} px-2">
                 <a class="nav-link" href="{{ url('/NBA') }}">{{--<i class="fas fa-basketball-ball"></i> --}}NBA</a>
@@ -30,7 +30,7 @@
 
 @if(!Route::is('welcome'))
 <nav class="navbar navbar-expand-lg navbar-light bg-light  p-0 m-0">
-    <div class="col-12  p-0 m-0">
+    <div class="col-12  px-0 mx-0">
         @include('includes.search-bar')
     </div>
 </nav>

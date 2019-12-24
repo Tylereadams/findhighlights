@@ -13,7 +13,7 @@
     <div class="input-group-prepend">
         <span class="input-group-text rounded-0" id="inputGroup-sizing-default"><i class="fas fa-search" id="search-bar-icon"></i></span>
     </div>
-    <input id="search" class="form-control rounded-0" type="text" placeholder="Ex: 'Browns', 'Nick Chubb', etc...">
+    <input id="search" class="form-control rounded-0" type="text" placeholder="Search for player, team or game...">
 </div>
 
 @push('scripts')
@@ -62,9 +62,13 @@
                     $.getJSON( "/autocomplete", request, function( data, status, xhr ) {
                         cache[ term ] = data;
                         response( data );
+                    }).then(function(){
+                        $('.dropdown-header').off('menufocus hover mouseover mouseenter');
+                        $('#search-bar-icon').removeClass('fa-spin fa-spinner');
+                        $('#search-bar-icon').addClass('fa-search');
                     });
                 },
-                open: function(event, ui) {
+                close: function(event, ui) {
                     $('.dropdown-header').off('menufocus hover mouseover mouseenter');
                     $('#search-bar-icon').removeClass('fa-spin fa-spinner');
                     $('#search-bar-icon').addClass('fa-search');

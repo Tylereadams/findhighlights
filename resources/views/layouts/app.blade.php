@@ -46,7 +46,7 @@
         }
 
         ul.navbar-nav .active{
-            border-bottom: 5px solid black;
+            border-bottom: 3px solid #000000;
         //text-decoration: underline;
         }
     </style>

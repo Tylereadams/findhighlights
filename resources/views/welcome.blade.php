@@ -9,7 +9,7 @@
     <div class="container">
 
         <div class="jumbotron bg-white text-center">
-            <h2>Search for highlights</h2>
+            <h2>Find Highlights</h2>
             @include('includes.search-bar')
         </div>
 
