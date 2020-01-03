@@ -26,15 +26,20 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
          $schedule->command('fh:upload-tweets')
-                  ->everyMinute();
+             ->everyMinute();
 
-         // Import games for today 4 times per day
-        $schedule->command('importer:import-games')
-            ->twiceDaily(20, 23);
-        $schedule->command('importer:import-games')
-            ->twiceDaily(4, 17);
+         // Import games from yesterday
         $schedule->command('importer:import-games "'.Carbon::now()->yesterday()->format('YYYY-mm-dd').'"')
             ->daily(2);
+
+         // Import games for today 6 times per day
+        $schedule->command('importer:import-games')
+            ->twiceDaily(3, 15);
+        $schedule->command('importer:import-games')
+            ->twiceDaily(17, 19);
+        $schedule->command('importer:import-games')
+            ->twiceDaily(21, 23);
+
     }
 
     /**
